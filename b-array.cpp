@@ -379,3 +379,26 @@ vector<int>mergeTwoSorted(vector<int>&arr1,vector<int>&arr2){
         for(int i=0;i<it->second;i++){ans.push_back(it->first);}
     }return ans;
 }
+// minimum difference in heights
+int getMinDiff(int arr[], int n, int k){
+    sort(arr,arr+n);
+    int ans = arr[n-1]-arr[0];
+    int largest = arr[n-1]-k;int smallest = arr[0]+k;int minH, maxH;
+    for(int i=0;i<n-1;i++){
+        minH = min(smallest,arr[i+1]-k);maxH = max(largest, arr[i]+k);
+        if(minH<0) continue;
+        ans = min(ans,maxH-minH);
+    }return ans;
+}
+// min jumps to reach end of the array 
+int minJumps(int arr[], int n) {
+    int jump = 0;int pos = 0;
+    int des = 0;
+    for(int i = 0; i < n-1; i++) {
+        des = max(des, arr[i] + i);
+        if(pos == i) {
+            if(des == pos)return -1;
+            pos = des;jump++;
+        }}
+    return jump;
+}
